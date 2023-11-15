@@ -3,14 +3,14 @@
 # QuickNewsApp
 
 QuickNews is an Android application that provides the latest news headlines.
-The App follows best Android development practices,
-it's built with Kotlin and uses modular approach for better testability, scalability and reusability.
+The App follows best Android development practices.
+It's built with Kotlin and uses modular approach for better testability, scalability and reusability.
 
 ## Features
 
 - Fetches latest news headlines from a remote API
 - Caches news articles for offline viewing
-- Uses Room for local data persistence
+- Uses Room database for local data persistence
 - Implements MVVM architecture pattern
 
 ## Technologies Used
