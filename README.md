@@ -2,7 +2,8 @@
 ```markdown
 # QuickNewsApp
 
-QuickNews is an Android application that provides the latest news headlines. It's built with Kotlin and uses modern Android development tools.
+QuickNews is an Android application that provides the latest news headlines.
+The App follows best Android development practices, it's built with Kotlin and uses modern Android development tools.
 
 ## Features
 
@@ -36,7 +37,7 @@ git clone https://github.com/KiselDaniel/QuickNewsApp.git
 
 ## Contributing
 
-Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome.
 
 ## License
 
