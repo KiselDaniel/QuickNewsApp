@@ -29,11 +29,12 @@ To get a local copy up and running, follow these steps:
 
 ```bash
 git clone https://github.com/KiselDaniel/QuickNewsApp.git
-```
 
 2. Open the project in Android Studio and build the project.
 
 3. Run the app on an emulator or a real device.
+
+```
 
 ## Contributing
 
