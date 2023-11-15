@@ -17,8 +17,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import com.dado.quicknews.data.AppConstants
 import com.dado.quicknews.data.api.NetworkAPIServiceI
+import com.dado.quicknews.data.database.AppDatabase
+import com.dado.quicknews.data.database.ArticleDaoI
 import com.dado.quicknews.data.datasource.NewsDataSource
 import com.dado.quicknews.data.datasource.NewsDataSourceI
+import com.dado.quicknews.data.datasource.NewsLocalDataSource
+import com.dado.quicknews.data.datasource.NewsLocalDataSourceI
 import com.dado.quicknews.ui.repository.NewsRepository
 
 
@@ -75,8 +79,14 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesNewsRepository(newsDataSource: NewsDataSourceI): NewsRepository {
-        return NewsRepository(newsDataSource)
+    fun providesNewsLocalDataSource(articleDao: ArticleDaoI): NewsLocalDataSourceI {
+        return NewsLocalDataSource(articleDao)
+    }
+
+    @Provides
+    @Singleton
+    fun providesNewsRepository(newsDataSource: NewsDataSourceI, newsLocalDataSource: NewsLocalDataSourceI): NewsRepository {
+        return NewsRepository(newsDataSource, newsLocalDataSource)
     }
 
     @Provides

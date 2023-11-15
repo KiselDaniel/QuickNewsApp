@@ -3,7 +3,7 @@ package com.dado.quicknews.data.di
 import android.content.Context
 import androidx.room.Room
 import com.dado.quicknews.data.database.AppDatabase
-import com.dado.quicknews.data.database.ArticleDao
+import com.dado.quicknews.data.database.ArticleDaoI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideArticleDao(appDatabase: AppDatabase): ArticleDao {
+    fun provideArticleDao(appDatabase: AppDatabase): ArticleDaoI {
         return appDatabase.articleDao()
     }
 }

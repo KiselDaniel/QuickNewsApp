@@ -37,4 +37,5 @@ dependencies {
     implementation(Dependencies.coreKtx)
     implementation(Dependencies.appCompat)
     implementation(Dependencies.material)
+    implementation(Dependencies.gson)
 }

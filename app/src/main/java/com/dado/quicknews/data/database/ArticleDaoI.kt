@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface ArticleDao {
+interface ArticleDaoI {
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<CachedArticle>
 

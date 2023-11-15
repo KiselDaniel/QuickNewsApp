@@ -58,6 +58,7 @@ android {
 dependencies {
 
     implementation(Dependencies.coreKtx)
+    implementation(Dependencies.kotlinStdlib)
     implementation(Dependencies.lifeCycleRuntimeKtx)
     implementation(Dependencies.activityCompose)
     implementation(platform(Dependencies.composeBom))
@@ -75,7 +76,6 @@ dependencies {
     testImplementation("junit:junit:4.12")
     kapt(Dependencies.hiltCompiler)
     kapt(Dependencies.hiltAndroidCompiler)
-
 
     // REST API
     implementation(Dependencies.retrofit)
@@ -106,6 +106,9 @@ dependencies {
     // Mockito
     testImplementation(Dependencies.mockito)
     testImplementation(Dependencies.mockitoKotlin)
+
+    // Gson serialization
+    implementation(Dependencies.gson)
 }
 
 kapt {

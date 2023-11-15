@@ -4,12 +4,14 @@ object Versions {
     const val material = "1.9.0"
     const val appCompat = "1.6.1"
     const val compose = "2023.03.00"
+    const val kotlinStdlib = "1.8.10"
     const val activityCompose = "1.7.2"
+    const val ktxSerialization = "1.6.0"
     const val navigationCompose = "2.7.0"
     const val lifeCycleRuntimeKtx = "2.6.1"
     const val lifeCycleViewModelKtx = "2.6.1"
 
-    // dagger hilt
+    // Dagger Hilt
     const val hilt = "2.48"
     const val hiltCompiler = "1.0.0"
     const val hiltNavigationCompose = "1.0.0"
@@ -29,16 +31,19 @@ object Versions {
     // Coroutines
     const val coroutines = "1.7.3"
 
-    // SplashScreen
+    // Splash Screen
     const val splashScreen = "1.0.1"
 
     // Coil
     const val coil = "2.2.0"
 
-    // PullRefresh
+    // Pull Refresh
     const val pullRefresh = "1.5.4"
 
     // Mockito
     const val mockito = "4.0.0"
     const val mockitoKotlin = "3.2.0"
+
+    // Gson
+    const val gson = "2.10.1"
 }

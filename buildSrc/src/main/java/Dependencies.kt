@@ -1,6 +1,7 @@
 object Dependencies {
 
     val coreKtx by lazy { "androidx.core:core-ktx:${Versions.coreKtx}" }
+    val kotlinStdlib by lazy { "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinStdlib}" }
     val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.appCompat}" }
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
     val activityCompose by lazy { "androidx.activity:activity-compose:${Versions.activityCompose}" }
@@ -53,6 +54,9 @@ object Dependencies {
     // Mockito
     val mockito by lazy { "org.mockito:mockito-core:${Versions.mockito}" }
     val mockitoKotlin by lazy {"org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"}
+
+    // Gson serialization
+    val gson by lazy { "com.google.code.gson:gson:${Versions.gson}" }
 }
 
 object Modules {
