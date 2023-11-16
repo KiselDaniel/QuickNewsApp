@@ -11,6 +11,7 @@ import com.dado.quicknews.data.model.Source
 import com.dado.utils.ResourceState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -50,10 +51,19 @@ class NewsRepository @Inject constructor(
                 } else {
                     emit(ResourceState.Error("Error fetching the data!"))
                 }
-            } else {
-                getCachedNewsHeadline()
-
-                emit(ResourceState.Offline("No internet connection!"))
+            }  else {
+                // Retrieve the cached news from the database if available else notify about offline state
+                val cachedNewsHeadline = getCachedNewsHeadline().firstOrNull()
+                if (cachedNewsHeadline is ResourceState.Success) {
+                    val newsArticleResponse = NewsArticleResponse(
+                        status = STATUS_OK,
+                        totalResults = cachedNewsHeadline.data.size,
+                        articles = cachedNewsHeadline.data.map { convertCachedArticleToArticle(it) }
+                    )
+                    emit(ResourceState.Success(newsArticleResponse))
+                } else {
+                    emit(ResourceState.Offline("No internet connection!"))
+                }
             }
         }.catch { error ->
             emit(ResourceState.Error(error.localizedMessage ?: "Unknown error!"))
@@ -63,10 +73,12 @@ class NewsRepository @Inject constructor(
     /**
      * Get cached articles from the database when there is no internet connection
      */
-    suspend fun getCachedNewsHeadline(): Flow<ResourceState<List<CachedArticle>>> {
+    private suspend fun getCachedNewsHeadline(): Flow<ResourceState<List<CachedArticle>>> {
         return flow {
-            emit(ResourceState.Loading())
             val cachedArticles = newsLocalDataSource.getArticles()
+            if (cachedArticles.isEmpty()) {
+                emit(ResourceState.Error("No cached articles found!"))
+            }
             emit(ResourceState.Success(cachedArticles))
         }.catch { error ->
             emit(ResourceState.Error(error.localizedMessage ?: "Unknown error!"))
@@ -87,5 +99,26 @@ class NewsRepository @Inject constructor(
                 name = article.source?.name
             )
         )
+    }
+
+    private fun convertCachedArticleToArticle(cachedArticle: CachedArticle): Article {
+        return Article(
+            author = cachedArticle.author,
+            title = cachedArticle.title,
+            description = cachedArticle.description,
+            url = cachedArticle.url,
+            urlToImage = cachedArticle.urlToImage,
+            publishedAt = cachedArticle.publishedAt,
+            content = cachedArticle.content,
+            source = Source(
+                id = cachedArticle.source?.id,
+                name = cachedArticle.source?.name
+            )
+        )
+    }
+
+    companion object {
+        private const val TAG = "NewsRepository"
+        private const val STATUS_OK = "ok"
     }
 }
