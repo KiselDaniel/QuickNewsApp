@@ -1,10 +1,11 @@
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.dado.utils.NetworkCheckerI
 
-object CoreUtility {
+object CoreUtility: NetworkCheckerI {
 
-   fun isInternetConnected(context: Context) : Boolean {
+   override fun isInternetConnected(context: Context) : Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.activeNetwork ?: return false
         val activeNetwork = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false

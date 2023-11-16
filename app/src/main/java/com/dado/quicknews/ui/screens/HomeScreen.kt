@@ -79,6 +79,10 @@ fun HomeScreen(
                     Log.d(TAG, "Inside_Error state with message: $error")
                 }
 
+                is ResourceState.Offline -> {
+                    val error = responseState.error
+                    Log.d(TAG, "Inside_Offline state with message: $error")
+                }
             }
         }
 

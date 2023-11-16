@@ -1,5 +1,6 @@
 package com.dado.quicknews.data.di
 
+import android.content.Context
 import com.dado.quicknews.BuildConfig
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -17,13 +18,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import com.dado.quicknews.data.AppConstants
 import com.dado.quicknews.data.api.NetworkAPIServiceI
-import com.dado.quicknews.data.database.AppDatabase
 import com.dado.quicknews.data.database.ArticleDaoI
 import com.dado.quicknews.data.datasource.NewsDataSource
 import com.dado.quicknews.data.datasource.NewsDataSourceI
 import com.dado.quicknews.data.datasource.NewsLocalDataSource
 import com.dado.quicknews.data.datasource.NewsLocalDataSourceI
 import com.dado.quicknews.ui.repository.NewsRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 @Module
@@ -32,6 +33,12 @@ class AppModule {
 
     companion object {
         private const val READ_TIMEOUT = 60L
+    }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(@ApplicationContext context: Context): Context {
+        return context
     }
 
     @Provides
@@ -85,8 +92,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesNewsRepository(newsDataSource: NewsDataSourceI, newsLocalDataSource: NewsLocalDataSourceI): NewsRepository {
-        return NewsRepository(newsDataSource, newsLocalDataSource)
+    fun providesNewsRepository(context: Context, newsDataSource: NewsDataSourceI, newsLocalDataSource: NewsLocalDataSourceI): NewsRepository {
+        return NewsRepository(context, newsDataSource, newsLocalDataSource)
     }
 
     @Provides

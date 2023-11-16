@@ -37,5 +37,11 @@ dependencies {
     implementation(Dependencies.coreKtx)
     implementation(Dependencies.appCompat)
     implementation(Dependencies.material)
+
+    // Gson serialization
     implementation(Dependencies.gson)
+
+    // Mockito
+    testImplementation(Dependencies.mockito)
+    testImplementation(Dependencies.mockitoKotlin)
 }
